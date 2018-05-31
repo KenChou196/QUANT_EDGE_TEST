@@ -1,6 +1,6 @@
 ﻿ver 1.0:
 + project sử dụng framework reactjs.
-+ phần mềm yêu cầu : npm
++ phần mềm yêu cầu : npm,node,xampp,navicat
 + cách start app: 
  - trong thư mục chứa source code (QUANT_EDGE_TEST) mở giao diện cmd,gõ lệnh : npm install hoặc yarn (nếu máy có sử dụng yarn ) để cài đặt thư mục node module.
  - sau khi cài đặt xong gõ lệnh : npm start để start app
@@ -17,6 +17,7 @@ ver 2.0 :
     		password: "",
     		database name: "quant_edge",
 + sử dụng navicat để bung (execute sql file ) file database/quant_edge.sql để retore lại database.
++ cài đặt node js để start server.
 + cài đặt xampp,khởi động và start apache + mysql.
 + start : 
 	server : trong thư mục server  bật cửa sổ command gõ lệnh " node index.js ".
