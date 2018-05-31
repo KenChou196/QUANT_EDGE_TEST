@@ -11,6 +11,8 @@
 	- viết service và thiết kế db,thay dữ liệu cứng bằng dữ liệu được request về.
 	- rà soát lỗi nếu có.
 ver 2.0 :
++ trong thư mục client và server bật cửa sổ cmd để chạy lệnh "yarn" hoặc "npm install" để tải về thư mục node module tương ứng.
++ server viết bằng node js.
 + thiết kế database và webserver,
 	-thông tin database : 
 		user: "root",
