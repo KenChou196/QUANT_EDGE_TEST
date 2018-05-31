@@ -1,0 +1,67 @@
+
+.mainPage {
+	background-color: #eeeeee;
+}
+.navMain {
+	background-color: #00c1de;
+}
+.logo {
+	color:#fff !important;
+	font-size: 20px;
+}
+.topItem {
+	font-size: 17px;
+    color: #fff !important;
+    padding-right: 25px;
+    padding-left: 25px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+.iamselected {                          
+	border-bottom: 3px solid #ff4084;
+	padding-bottom: 14px;
+}
+.lableList {
+	background-color: #fff;
+	margin-left: 0px;
+    margin-right: 0px;
+    border-bottom: 2px solid #eeeeee;
+}
+.lableList p {
+	margin-top: 12px;
+	color: #8c8c8c;
+	font-size: 15px;
+}
+.listRight {
+	text-align: right;
+}
+.itemList {
+	margin-left: 0px;
+    margin-right: 0px;
+    border-bottom: 2px solid #eeeeee;
+	background-image: url(../img/bg.png);
+	align-items: center;
+}
+.itemList p {
+	padding-top: 12px;
+}
+.code {
+	color: #026cd6;
+	text-transform: uppercase;
+}
+.company {
+	color: #737373;
+	text-transform: uppercase;
+}
+.price {
+	font-weight: 550;
+}
+.value {
+	font-weight: 550;
+}
+.colorRed {
+	color:#ff3761;
+}
+.colorBlue {
+	color: #28da7d;
+}
