@@ -5,8 +5,9 @@ $(document).ready(function() {
 		$(this).addClass('iamselected');
 		$(".topItem").not(this).removeClass('iamselected')
 	});
+	//-------change color ---------
 	setInterval(function(){ 
-		for(var i = 0 ; i<14 ; i++) {
+		for(var i = 0 ; i<32 ; i++) {
 			var value = $('#' + i).text();
 			//console.log(value + '------' +typeof(value));
 			var vaFloat = parseFloat(value);

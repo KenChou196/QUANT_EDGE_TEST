@@ -3,24 +3,29 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      response:[],
+      response:[],//----------data will store here ---------
+      checkFlag:0,//----------check flag soft or not --------- 
     }
   }
   componentWillMount () {
     
   }
-  //--------clock-----------
   componentDidMount() {
-    this.intervalID = setInterval(
+    this.intervalID = setInterval( //set interval change after 5s 
       () => this.tick(),
       5000
     );
-    //--------------
+    this.intervalID01 = setInterval( //set interval change after 5s 
+      () => this.sortItem(this.state.response,this.state.checkFlag),
+      5000
+    );
+    //-------------- api call to server to get data -----------
     this.callApi()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
 
   }
+  //-------call api function----------
   callApi = async () => {
     const response = await fetch('/get-data');
     const body = await response.json();
@@ -31,8 +36,11 @@ class App extends Component {
   };
   //--------------------------
   componentWillUnmount() {
+    //----------clear interval after unmount -------------
     clearInterval(this.intervalID);
+    clearInterval(this.intervalID01);
   }
+  //--------------handle data change after evrery 5s -----------
   tick() {
     let changeData = this.state.response;
     let defaultData = this.state.response;
@@ -51,9 +59,11 @@ class App extends Component {
     }
     this.setState({
       response:changeData,
-    })
+    });
+    //this.sortItem(this.state.response,this.state.checkFlag);
+    return
   }
-
+//---------------create random value for price and volume -------------
   createRandomDeltaPrice (price) {
     //let price = parseFloat(price1).toFixed(2);
     let max = price + price*5/100;
@@ -68,6 +78,7 @@ class App extends Component {
     //return newVol;
     return parseFloat(newVol).toFixed(0);
   }
+  //-----------------map item for view ------------------
   mapItemToList = (data) => {
     return(
       <div>
@@ -84,7 +95,35 @@ class App extends Component {
       </div>
     )
   }
- 
+ //--------------sort Item ----------------
+ sortItem = (arr,e) => {
+  if (e === 0) {
+    return
+  }
+  var len = arr.length;
+   for (var i = len-1; i>=0; i--){
+     for(var j = 1; j<=i; j++){
+       if(arr[j-1].price*arr[j-1].volume > arr[j].price*arr[j].volume){
+           var temp = arr[j-1];
+           arr[j-1] = arr[j];
+           arr[j] = temp;
+        }
+     }
+   }
+  if (e === 2) {
+    this.setState({
+      response:arr.slice(0,20)
+    })
+  }
+  if (e === 1) {
+    arr = arr.reverse();
+    this.setState({
+      response:arr.slice(0,20)
+    })
+  }
+  return ;
+ }
+ //--------------------render main view -----------------------
   render() {
     return (
       <div className="App">
@@ -99,8 +138,8 @@ class App extends Component {
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                 </ul>
                 <div className="my-2 my-lg-0">
-                  <a className="my-2 my-sm-0 topItem" onClick={()=>alert('upgrading')}>TOP GAINERS</a>
-                  <a className="my-2 my-sm-0 topItem" onClick={()=>alert('upgrading')}>TOP LOSERS</a>
+                  <a className="my-2 my-sm-0 topItem" onClick={()=>this.sortItem(this.state.response,1)}>TOP GAINERS</a>
+                  <a className="my-2 my-sm-0 topItem" onClick={()=>this.sortItem(this.state.response,2)}>TOP LOSERS</a>
                 </div>
               </div>
             </nav>
@@ -114,12 +153,12 @@ class App extends Component {
               <p className="col-md-2 listRight">Change</p>
               <p className="col-md-2 listRight">%Change</p>
             </div>
-            {this.mapItemToList(this.state.response)}   
+            {this.mapItemToList(this.state.response.slice(0,25))}   
           </div>
         </div>
       </div>
     );
   }
 }
-
+//----------end--------------
 export default App;
