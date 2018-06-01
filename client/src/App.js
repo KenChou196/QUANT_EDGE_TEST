@@ -97,6 +97,12 @@ class App extends Component {
  //--------------sort Item ----------------
  sortItem = (arr,e) => {
   //alert('sort');
+   if (e === 0) {
+    this.setState({
+      checkFlag: 0,
+    })
+    return;
+  }
   var len = arr.length;
    for (var i = len-1; i>=0; i--){
      for(var j = 1; j<=i; j++){
@@ -107,19 +113,19 @@ class App extends Component {
         }
      }
    }
-  if (e === 0) {
-    return;
-  }
+ 
   if (e === 2) {
     this.setState({
-      response:arr.slice(0,20)
+      checkFlag:2,
+      response:arr
     })
     return;
   }
   if (e === 1) {
     arr = arr.reverse();
     this.setState({
-      response:arr.slice(0,20)
+      checkFlag:1,
+      response:arr
     })
     return;
   }
@@ -155,7 +161,7 @@ class App extends Component {
               <p className="col-md-2 listRight">Change</p>
               <p className="col-md-2 listRight">%Change</p>
             </div>
-            {this.mapItemToList(this.state.response.slice(0,25))}   
+            {this.mapItemToList(this.state.response.slice(0,20))}   
           </div>
         </div>
       </div>
