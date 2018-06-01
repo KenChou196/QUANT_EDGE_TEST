@@ -12,13 +12,13 @@ class App extends Component {
   }
   componentDidMount() {
     this.intervalID = setInterval( //set interval change after 5s 
-      () => this.tick(),
+      ()=>this.tick(),
       5000
     );
-    this.intervalID01 = setInterval( //set interval change after 5s 
-      () => this.sortItem(this.state.response,this.state.checkFlag),
-      5000
-    );
+    // this.intervalID01 = setInterval( //set interval change after 5s 
+    //   ()=>this.sortItem(this.state.response,this.state.checkFlag),
+    //   5000
+    // );
     //-------------- api call to server to get data -----------
     this.callApi()
       .then(res => this.setState({ response: res.express }))
@@ -38,7 +38,6 @@ class App extends Component {
   componentWillUnmount() {
     //----------clear interval after unmount -------------
     clearInterval(this.intervalID);
-    clearInterval(this.intervalID01);
   }
   //--------------handle data change after evrery 5s -----------
   tick() {
@@ -56,12 +55,12 @@ class App extends Component {
       changeData[i].change = delvolumeNum*deltaPrice - defaulVolume*defaulPrice;
       changeData[i].perChange =  changeData[i].change/defaulVolume/defaulPrice *100;
       //console.log('new volume === ' +  delvolumeNum + 'defaul volume ====' + defaulVolume + 'change ==='+ changeData[i].change);
-    }
+    };
+    this.sortItem(this.state.response,this.state.checkFlag);
     this.setState({
       response:changeData,
     });
-    //this.sortItem(this.state.response,this.state.checkFlag);
-    return
+    
   }
 //---------------create random value for price and volume -------------
   createRandomDeltaPrice (price) {
@@ -97,9 +96,7 @@ class App extends Component {
   }
  //--------------sort Item ----------------
  sortItem = (arr,e) => {
-  if (e === 0) {
-    return
-  }
+  //alert('sort');
   var len = arr.length;
    for (var i = len-1; i>=0; i--){
      for(var j = 1; j<=i; j++){
@@ -110,16 +107,21 @@ class App extends Component {
         }
      }
    }
+  if (e === 0) {
+    return;
+  }
   if (e === 2) {
     this.setState({
       response:arr.slice(0,20)
     })
+    return;
   }
   if (e === 1) {
     arr = arr.reverse();
     this.setState({
       response:arr.slice(0,20)
     })
+    return;
   }
   return ;
  }
