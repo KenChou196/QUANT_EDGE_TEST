@@ -24,5 +24,5 @@ $(document).ready(function() {
 				$('#' + i).next().removeClass('colorBlue');
 			}
 		}
-	},5000);
+	},0);
 });
